@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+	
+	<import resource="springmvc-servlet.xml"/>
+
+	<bean name="abc" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/ds"></property>
+	</bean>
+	
+	<!-- 创建spring和mybatis整合后用的工厂对象 -->
+	<bean id="fact" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="abc"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	</bean>
+	
+	<!-- mapper扫描器，来创建dao接口的实现类 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.xkit.ssm.dao"></property>
+		<property name="sqlSessionFactoryBeanName" value="fact"></property>
+	</bean>
+	
+	<context:component-scan base-package="com.xkit.ssm.service.impl"></context:component-scan>
+	
+	<aop:aspectj-autoproxy />
+	
+	<!-- 提交事务 -->
+	<bean id="trans" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="abc"></property>
+	</bean>
+	<!-- 事务级别 -->
+	<tx:advice id="txAdvice" transaction-manager="trans">
+		<tx:attributes>
+			<tx:method name="insert*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED"/>
+			<tx:method name="*" read-only="true" propagation="SUPPORTS"/>
+		</tx:attributes>
+	</tx:advice>
+	<!-- 将切入点和事务组合 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.xkit.ssm.service.impl.*.*(..))" id="pc"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pc" />
+	</aop:config>
+	
+</beans>
+
+
+
+
+
+
+
+
+
+

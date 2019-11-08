@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        
+	<!-- 负责将方法与url对应 -->
+	
+	<!-- 完成视图的对应 -->
+	<context:component-scan base-package="com.xkit.ssm.handler"></context:component-scan>
+	<!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+		<property name="prefix" value="/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+	<!-- 异常处理 -->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">WEB-INF/pages/error</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 文件上传解析器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize">
+			<value>5242880</value>
+		</property>
+		<property name="defaultEncoding" value="utf-8" />
+	</bean>
+	
+	<!-- 消息（响应数据）转换器 -->
+ 	 
+	
+	<mvc:annotation-driven conversion-service="myConversionService">
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=utf-8</value>
+						<value>text/plain;charset=utf-8</value>
+					</list>
+				</property>
+			</bean>
+			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"> 
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=utf-8</value>
+						<value>text/plain;charset=utf-8</value>
+					</list>
+				</property>
+				<property name="features">
+					<list>
+						<value>WriteDateUseDateFormat</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+
+
+	<mvc:resources location="/statics/js/" mapping="/js/**" />
+	<mvc:resources location="/statics/images/" mapping="/images/**" />
+	<mvc:resources location="/statics/css/" mapping="/css/**" />
+	<mvc:resources location="/statics/photo/" mapping="/photo/**" />
+	
+	<bean id="myConversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="com.xkit.ssm.convert.DateConvert"></bean>
+			</list>
+		</property>
+	</bean>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/manage/**"/>
+			<bean class="com.xkit.ssm.Interceptor.LoginInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+</beans>

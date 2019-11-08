@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xkit.ssm.dao.Easybuy_userDAO">
+	
+	<select id="Login" resultType="Easybuy_user" parameterType="Easybuy_user">
+		select * from easybuy_user where loginName=#{loginName} and password=#{password};
+	</select>
+	
+	<insert id="insert" parameterType="Easybuy_user">
+		INSERT INTO `easybuy_user` (`loginName`,`userName`,`password`,`sex`,`identityCode`,`email`,`mobile`,`type`) 
+		VALUE(#{loginName},#{userName},#{password},#{sex},#{identityCode},#{email},#{mobile},#{type});
+	</insert>
+	
+	<select id="selectUser" resultType="Easybuy_user">
+		select * from easybuy_user
+	</select>
+	
+	<select id="qureyUser" parameterType="String"  resultType="Integer">
+		SELECT COUNT(*) FROM `easybuy_user` WHERE `loginName`=#{value}
+	</select>
+	
+	<select id="selectUserBypage" resultType="Easybuy_user">
+		SELECT * FROM `easybuy_user`
+		<trim prefix="where" prefixOverrides="and">
+			<if test="user.loginName!=null and user.loginName!=''">
+				and loginName like '%${user.loginName}%'
+			</if>
+			<if test="user.userName!=null and user.userName!=''">
+				and userName like '%${user.userName}%'
+			</if>
+			<if test="user.sex!=null">
+				and sex = #{user.sex}
+			</if>
+			<if test="user.mobile!=null and user.mobile!=''">
+				and mobile like '%${user.mobile}%'
+			</if>
+		</trim>
+		LIMIT #{pageIndex},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="Integer" parameterType="Easybuy_user">
+		SELECT COUNT(*) FROM `easybuy_user`
+		<trim prefix="where" prefixOverrides="and">
+			<if test="loginName!=null and loginName!=''">
+				and loginName like '%${loginName}%'
+			</if>
+			<if test="userName!=null and userName!=''">
+				and userName like '%${userName}%'
+			</if>
+			<if test="sex!=null">
+				and sex = #{sex}
+			</if>
+			<if test="mobile!=null and mobile!=''">
+				and mobile like '%${mobile}%'
+			</if>
+		</trim>
+	</select>
+	
+	<delete id="deleteUser" parameterType="Integer">
+		DELETE FROM `easybuy_user` WHERE id = #{id}
+	</delete>
+</mapper>
