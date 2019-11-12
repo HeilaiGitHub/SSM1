@@ -56,7 +56,7 @@
             <div class="left_m">
             	<div class="left_m_t t_bg1">商品管理</div>
                 <ul>
-                	<li><a target="right" href="showAllServlet" class="now">查看所有</a></li>
+                	<li><a target="right" href="${pageContext.request.contextPath }/manage/fenye" class="now">查看所有</a></li>
                     <li><a target="right" href="manage/addproduct.jsp">新增</a></li>
                 </ul>
             </div>

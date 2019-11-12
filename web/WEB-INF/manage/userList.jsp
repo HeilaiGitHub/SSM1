@@ -9,23 +9,22 @@
 	<script type="text/javascript" src="/js/lrscroll_1.js"></script>
 	<script type="text/javascript" src="/js/n_nav.js"></script>
     <script type="text/javascript">
-    $(document).ready(function(){
-            function dosubmit(num){
-                $("#pageIndex").value(num);
-                $("#form_user").submit();
-            }
-    });
-    	
+        function dosubmit(num){
+            document.getElementById('pageIndex').value=num;
+            document.getElementById('form_user').submit();
+        }
     </script>
 		<div class="m_right">
             <p></p>
-            <div class="mem_tit">所有用户</div>
-            <form id="form_user" action="${pageContext.request.contextPath }/manage/qureyAllUser" method="post">
-            	姓名：<input type="text" name="userName" value="${user.userName }"><br>账户：<input type="text" name="loginName" value="${user.loginName }"><br>
-            	男：<input type="radio" name="sex" value="1" >女：<input type="radio" name="sex" value="0" ><br>
-            	电话：<input type="text" name="mobile" value="${user.mobile }"><br><input type="hidden" name="pageIndex" id="pageIndex">
-            	<input type="submit" value="搜索">
-            </form>
+            <div style="text-align: center">
+                <div class="mem_tit">所有用户</div>
+                <form id="form_user" action="${pageContext.request.contextPath }/manage/qureyAllUser" method="post">
+                    姓名：<input type="text" name="userName" value="${user.userName }"><br>账户：<input type="text" name="loginName" value="${user.loginName }"><br>
+                    男：<input type="radio" name="sex" value="1" >女：<input type="radio" name="sex" value="0" ><br>
+                    电话：<input type="text" name="mobile" value="${user.mobile }"><br><input type="hidden" name="pageIndex" id="pageIndex">
+                    <input type="submit" value="搜索">
+                </form>
+            </div>
             <table border="0" class="order_tab" style="width:930px; text-align:center; margin-bottom:30px;" cellspacing="0" cellpadding="0">
               <tr>                                                                                                                                                    
                 <td width="20%">用户编号</td>

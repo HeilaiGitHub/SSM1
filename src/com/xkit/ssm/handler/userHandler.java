@@ -39,7 +39,7 @@ public class userHandler {
 		}else{
 			session.setAttribute("loginUser", u);
 			m.addAttribute("zh", u.getLoginName());
-			return "WEB-INF/manager/mainIndex";
+			return "WEB-INF/manage/mainIndex";
 		}
 	}
 	
@@ -80,7 +80,7 @@ public class userHandler {
 	
 	@RequestMapping("/manage/welcome")
 	public String welcome(){
-		return "WEB-INF/manager/welcome";
+		return "WEB-INF/manage/welcome";
 	}
 	
 	@RequestMapping("/manage/qureyAllUser")
@@ -100,7 +100,7 @@ public class userHandler {
 		pagebean.setRecord(record);
 		m.addAttribute("pagebean", pagebean);
 		m.addAttribute("user", user);
-		return "WEB-INF/manager/userList";
+		return "WEB-INF/manage/userList";
 	}
 	
 	@RequestMapping("/manage/delUser/{id}")
@@ -114,5 +114,5 @@ public class userHandler {
 			return "forward:/manage/qureyAllUser";
 		}
 	}
-	
+
 }
