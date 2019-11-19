@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="regist">
     	<div class="log_img"><img src="images/l_img.png" width="611" height="425" /></div>
 		<div class="reg_c">
-        	<fm:form id="jq_frm" action="${pageContext.request.contextPath }/regist" modelAttribute="easybuy_user" method="post">
+        	<fm:form id="jq_frm" action="${pageContext.request.contextPath }/regist" modelAttribute="easybuyUser" method="post">
             <table border="0" style="width:420px; font-size:14px; margin-top:20px;" cellspacing="0" cellpadding="0">
               <tr height="50" valign="top">
               	<td width="95">&nbsp;</td>
@@ -79,8 +79,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </tr>
               <tr height="50">
                 <td align="right"><font color="#ff4e00">*</font>&nbsp;用户名 &nbsp;</td>
-                <td><input type="text" value="" name="loginName" id="loginName" class="l_user" />
-                <fm:errors path="loginName"></fm:errors></td>
+                <td><input type="text" value="" name="password" id="password" class="l_user" />
+                <fm:errors path="password"></fm:errors></td>
               </tr>
               <tr height="50">
                 <td align="right"><font color="#ff4e00">*</font>&nbsp;密码 &nbsp;</td>
@@ -103,13 +103,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </tr>
               <tr height="50">
                 <td align="right">真实姓名 &nbsp;</td>
-                <td><input type="text" value="" name="userName" id=“userName" class="l_mem" />
-                <fm:errors path="userName"></fm:errors></td>
+                <td><input type="text" value="" name="username" id=“username" class="l_mem" />
+                <fm:errors path="username"></fm:errors></td>
               </tr>
               <tr height="50">
                 <td align="right">身份证号 &nbsp;</td>
-                <td><input type="text" value="" name="identityCode" id="identityCode" class="l_num" />
-                <fm:errors path="identityCode"></fm:errors></td>
+                <td><input type="text" value="" name="identitycode" id="identitycode" class="l_num" />
+                <fm:errors path="identitycode"></fm:errors></td>
               </tr>
               <tr height="50">
                 <td align="right"> <font color="#ff4e00">*</font>&nbsp;验证码 &nbsp;</td>

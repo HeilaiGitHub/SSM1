@@ -1,6 +1,6 @@
 package com.xkit.ssm.handler;
 
-import com.xkit.ssm.entity.Easybuy_product;
+import com.xkit.ssm.entity.EasybuyProduct;
 import com.xkit.ssm.service.Easybuy_productService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class productHandler {
         if (pageIndex<1 || pageIndex>pageCount){
             pageIndex = 1;
         }
-        List<Easybuy_product> list = ser.qureyProductLimit(pageIndex, pageSize);
+        List<EasybuyProduct> list = ser.qureyProductLimit(pageIndex, pageSize);
         m.addAttribute("record",record);
         m.addAttribute("pageIndex",pageIndex);
         m.addAttribute("pageSize",pageSize);

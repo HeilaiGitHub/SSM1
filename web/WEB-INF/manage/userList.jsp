@@ -19,7 +19,7 @@
             <div style="text-align: center">
                 <div class="mem_tit">所有用户</div>
                 <form id="form_user" action="${pageContext.request.contextPath }/manage/qureyAllUser" method="post">
-                    姓名：<input type="text" name="userName" value="${user.userName }"><br>账户：<input type="text" name="loginName" value="${user.loginName }"><br>
+                    姓名：<input type="text" name="username" value="${user.username }"><br>账户：<input type="text" name="loginname" value="${user.loginname }"><br>
                     男：<input type="radio" name="sex" value="1" >女：<input type="radio" name="sex" value="0" ><br>
                     电话：<input type="text" name="mobile" value="${user.mobile }"><br><input type="hidden" name="pageIndex" id="pageIndex">
                     <input type="submit" value="搜索">
@@ -37,8 +37,8 @@
               <c:forEach items="${pagebean.list}" var="n">
               	<tr>
                 <td><font color="#ff4e00">${n.id}</font></td>
-                <td>${n.loginName}</td>
-                <td>${n.userName}</td>
+                <td>${n.loginname}</td>
+                <td>${n.username}</td>
                 <td>${n.password}</td>
                 <td>${n.sex}</td>
                 <td><a href="${pageContext.request.contextPath }/manage/delUser/${n.id}">删除</a></td>

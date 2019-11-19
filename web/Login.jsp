@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="login">
     	<div class="log_img"><img src="images/l_img.png" width="611" height="425" /></div>
 		<div class="log_c">
-        	<fm:form action="${pageContext.request.contextPath }/login" modelAttribute="easybuy_user" method="post">
+        	<fm:form action="${pageContext.request.contextPath }/login" modelAttribute="easybuyUser" method="post">
             <table border="0" style="width:370px; font-size:14px; margin-top:30px;" cellspacing="0" cellpadding="0">
               <tr height="50" valign="top">
               	<td width="55">&nbsp;</td>
@@ -78,8 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <tr height="70">
                 <td>用户名</td>
                 <td>
-                <input type="text" value="" name="loginName" id="loginName" class="l_user" />
-                <fm:errors path="loginName"></fm:errors>
+                <input type="text" value="" name="loginname" id="loginname" class="l_user" />
+                <fm:errors path="loginname"></fm:errors>
                 </td>
               </tr>
               <tr height="70">

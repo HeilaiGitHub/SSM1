@@ -2,24 +2,24 @@ package com.xkit.ssm.service;
 
 import java.util.List;
 
+import com.xkit.ssm.entity.EasybuyUser;
 import org.apache.ibatis.annotations.Param;
 
-import com.xkit.ssm.entity.Easybuy_user;
 
 
 
 public interface Easybuy_userService {
-	public Easybuy_user Login(Easybuy_user user);
+	public EasybuyUser Login(EasybuyUser user);
 
-	public boolean insert(Easybuy_user user);
+	public boolean insert(EasybuyUser user);
 	
-	public List<Easybuy_user> qureyUser();
+	public List<EasybuyUser> qureyUser();
 	
 	public boolean selectUser(String name);
 	
-	public List<Easybuy_user> selectUserBypage(int pageIndex,int pageSize,Easybuy_user user); 
+	public List<EasybuyUser> selectUserBypage(int pageIndex,int pageSize,EasybuyUser user);
 	
-	public int count(Easybuy_user user);
+	public int count(EasybuyUser user);
 	
 	public boolean delUser(int id);
 }

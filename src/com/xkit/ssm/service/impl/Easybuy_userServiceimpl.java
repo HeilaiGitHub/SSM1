@@ -2,13 +2,11 @@ package com.xkit.ssm.service.impl;
 
 import java.util.List;
 
+import com.xkit.ssm.dao.EasybuyUserMapper;
+import com.xkit.ssm.entity.EasybuyUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.xkit.ssm.dao.Easybuy_userDAO;
-import com.xkit.ssm.entity.Easybuy_user;
 import com.xkit.ssm.service.Easybuy_userService;
 
 
@@ -16,13 +14,13 @@ import com.xkit.ssm.service.Easybuy_userService;
 public class Easybuy_userServiceimpl implements Easybuy_userService {
 	
 	@Autowired
-	private Easybuy_userDAO dao;
+	private EasybuyUserMapper dao;
 	
-	public Easybuy_user Login(Easybuy_user user) {
+	public EasybuyUser Login(EasybuyUser user) {
 		return dao.Login(user);
 	}
 	
-	public boolean insert(Easybuy_user user) {
+	public boolean insert(EasybuyUser user) {
 		int num = dao.insert(user);
 		if(num>0){
 			return true;
@@ -30,7 +28,7 @@ public class Easybuy_userServiceimpl implements Easybuy_userService {
 		return false;
 	}
 
-	public List<Easybuy_user> qureyUser() {
+	public List<EasybuyUser> qureyUser() {
 		return dao.selectUser();
 	}
 
@@ -38,13 +36,13 @@ public class Easybuy_userServiceimpl implements Easybuy_userService {
 		return dao.qureyUser(name)==0;
 	}
 
-	public List<Easybuy_user> selectUserBypage(int pageIndex, int pageSize,
-			Easybuy_user user) {
+	public List<EasybuyUser> selectUserBypage(int pageIndex, int pageSize,
+											  EasybuyUser user) {
 		
 		return dao.selectUserBypage(pageIndex, pageSize, user);
 	}
 
-	public int count(Easybuy_user user) {
+	public int count(EasybuyUser user) {
 		return dao.count(user);
 	}
 

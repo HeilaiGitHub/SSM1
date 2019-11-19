@@ -39,7 +39,7 @@
         </tr>
         <c:forEach items="${productList}" var="p">
             <tr>
-                <td><img src="${p.fileName}"></td>
+                <td><img src="${p.filename}"></td>
                 <td>${p.name}</td>
                 <td>${p.price}</td>
                 <td>${p.stock}</td>
