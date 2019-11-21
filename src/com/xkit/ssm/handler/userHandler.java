@@ -1,6 +1,8 @@
 package com.xkit.ssm.handler;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -129,5 +131,28 @@ public class userHandler {
 		pageInfo.getPageSize();
 		model.addAttribute("list",lsit);
 		return lsit;
+	}
+
+	@RequestMapping("/testQureyUser.do")
+	@ResponseBody
+	public Map<String,Object> testQureyUser(int page,int rows){
+		PageHelper.startPage(page,rows);
+		List<EasybuyUser> list = ser.qureyUser();
+		PageInfo<EasybuyUser> pageInfo = new PageInfo<EasybuyUser>(list);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("total",pageInfo.getTotal());
+		map.put("rows",list);
+		return map;
+	}
+
+	@RequestMapping("/deletTestUser.do")
+	@ResponseBody
+	public String deletTestUser(int id){
+		String rs = null;
+		boolean isok = ser.delUser(id);
+		if (isok){
+			rs="{\"msg\":\"删除成功!\"}";
+		}
+		return rs;
 	}
 }
